@@ -24,7 +24,7 @@ To use the LED controller, follow these steps:
 To get started with the LED controller PCB design, follow these steps:
 
 1. Clone this repository to your local machine.
-2. Open the PCB design files in your preferred PCB design software.
+2. Open the PCB design files in your KiCAD software.
 3. Review the design and make any necessary modifications.
 4. Export the design files to your preferred format.
 5. Send the design files to a PCB manufacturer for production.
