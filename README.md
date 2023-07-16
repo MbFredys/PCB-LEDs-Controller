@@ -1,4 +1,5 @@
 <h1>LED Controller</h1>
+![LED CONTROLLER IMAGES](./Release/led-controller2.png)
 
 This is a LED controller PCB design exercise that allows for precise control of LED brightness and color with the following features:
 
