@@ -1,44 +1,49 @@
-<h1>LED Controller</h1>
-<a href="https://ohwr.org/projects/cern-ohl/wikis/CERN-OHL-version-2" target="_blank"> <img src="https://img.shields.io/badge/license-CERN--OHL--W%202.0-blue.svg" alt="License: CERN-OHL-W-2.0"> </a>
+# LED Controller — Earlier Design Exercise
 
-This is a LED controller PCB design exercise that allows for precise control of LED brightness and color with the following features:
+Earlier PCB design exercise combining an ESP32, AC/DC supply modules and LED-control circuitry.
 
-1. 💡 Allows for the regulation of LED brightness.
-2. 🎨 Allows for the choice of color if it's an RGB LED.
-3. 🔌 Accepts a supply voltage of 100-240V AC.
-4. 🔋 Has 12V DC / 5A and 24V DC / 2.5A outputs.
-5. 📶 Has WiFi and Bluetooth communication by ESP32 Microcontroller.
-6. ⏰ Has a built-in clock for timed lighting.
-7. ♻️ Allows for energy-efficient LED usage.
+> **Status: unvalidated design exercise.** KiCad files, a PDF schematic and renders are available. No firmware or test results are supplied. The published manufacturing directory contains drill-related files, not a complete released fabrication package.
 
-<h1>Usage</h1>
+![PCB design render](Release/led-controller1.png)
 
-To use the LED controller, follow these steps:
+## Intended architecture
 
-1. Connect the LED controller to a power source using a 100-240V AC power supply.
-2. Connect the LED(s) to the LED controller.
-3. Set the desired brightness and color using the controller's interface.
-4. Use the built-in clock to turn the LED(s) on and off at specific times.
+The published component netlist includes:
 
-<h1>Getting Started</h1>
+- **ESP32-WROOM-32** controller.
+- **IRM-60-12** and **IRM-60-24** AC/DC supply modules.
+- **PCA9685BS** PWM controller.
+- **FT232RL** USB-to-UART interface.
+- **MOC3021M** optocoupler and **BT136-500** triac.
+- **2N7000** devices and **LM1117-3.3** regulation.
 
-To get started with the LED controller PCB design, follow these steps:
+The supply-module ratings are component ratings, not validated output capabilities of the assembled board. Scheduling, wireless control, efficiency improvements and dimming performance require firmware and testing and are not demonstrated here.
 
-1. Clone this repository to your local machine.
-2. Open the PCB design files in your KiCAD software.
-3. Review the design and make any necessary modifications.
-4. Export the design files to your preferred format.
-5. Send the design files to a PCB manufacturer for production.
+## Before further development
 
-<h1>Contributing</h1>
+1. Review mains-related separation, protection, component ratings and enclosure requirements.
+2. Verify low-voltage rail loading, signal levels and the proposed LED drive stages.
+3. Define load types, channel currents, switching behavior and fault handling.
+4. Run ERC/DRC after synchronizing schematic and PCB.
+5. Prepare a complete reviewed BOM and fabrication package.
+6. Develop firmware and validate a prototype using appropriate safety procedures.
 
-If you would like to contribute to the LED controller PCB design, please follow these steps:
+Do not connect the board to mains or send the historical outputs for production based only on this documentation.
 
-1. Fork this repository.
-2. Create a new branch.
-3. Make your changes and commit them.
-4. Submit a pull request.
+## Relationship to later work
 
-<h1>License</h1>
-This project is licensed under the CERN Open Hardware Licence Version 2 - Weakly Reciprocal (CERN-OHL-W-2.0).
-See the <a href="https://gitlab.com/ohwr/project/cernohl/-/wikis/uploads/82b567f43ce515395f7ddbfbad7a8806/cern_ohl_w_v2.txt" target="_blank">CERN-OHL-W-2.0 ↗</a> file for more information.</p>
+The separate [RGB+CCT controller](https://github.com/MbFredys/RGB-LED-and-High-Dencity-CCT-Controller) explores a five-channel architecture with a nominal 12 V input. It is also a design under review, not a validated replacement product.
+
+## Files
+
+| Directory | Purpose |
+|---|---|
+| [KiCAD files](KiCAD%20files/) | Editable schematic, PCB, project, BOM and netlist |
+| [PDF Schematic](PDF%20Schematic/) | PDF circuit documentation |
+| [Release](Release/) | Renders |
+| [Manufacturing](Manufacturing/) | Partial historical outputs |
+| [Firmware](Firmware/) | Availability note; no implementation |
+
+## License
+
+CERN-OHL-W-2.0. See [LICENSE](LICENSE) and [COPYING](COPYING).
